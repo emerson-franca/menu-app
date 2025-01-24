@@ -38,7 +38,7 @@ export const Menu: React.FC<MenuProps> = ({
   }
 
   return (
-    <div className="bg-white md:rounded-lg md:shadow-sm">
+    <div className="bg-theme-background md:rounded-lg md:shadow-sm">
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <CategoryTabs
         sections={menuData.sections}
@@ -56,7 +56,7 @@ export const Menu: React.FC<MenuProps> = ({
           />
         ))}
       </div>
-      <div className="left-0 right-0 pt-2 pb-6 px-6 bg-white border-t md:hidden">
+      <div className="left-0 right-0 pt-2 pb-6 px-6 bg-theme-background border-t md:hidden">
         {items.length > 0 && (
           <button
             onClick={() => setIsBasketVisible(!isBasketVisible)}

@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useRestaurant } from "../../contexts/RestaurantContext";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { restaurantData } = useRestaurant();
 
   return (
     <>
       {/* Mobile Header */}
-      <header className="bg-primary h-14 flex items-center justify-between py-[18px] px-4 md:hidden relative">
+      <header className="bg-nav-bg h-14 flex items-center justify-between py-[18px] px-4 md:hidden relative">
         <div className="w-8"></div>
-        <h1 className="text-strong">Menu</h1>
+        <h1 className="text-white font-medium">{restaurantData.name}</h1>
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-white"
@@ -39,28 +41,28 @@ export const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="absolute top-14 left-0 right-0 bg-primary z-50">
+          <div className="absolute top-14 left-0 right-0 bg-nav-bg z-50">
             <nav className="flex flex-col">
               <a
                 href="/menu"
-                className="text-white px-4 py-3 hover:bg-primary-dark"
+                className="text-white px-4 py-3 hover:bg-primary-hover"
                 onClick={() => setIsMenuOpen(false)}
               >
                 MENU
               </a>
               <a
-                href="/login"
-                className="text-white px-4 py-3 hover:bg-primary-dark"
+                href="/about"
+                className="text-white px-4 py-3 hover:bg-primary-hover"
                 onClick={() => setIsMenuOpen(false)}
               >
-                ENTRAR
+                ABOUT
               </a>
               <a
                 href="/contact"
-                className="text-white px-4 py-3 hover:bg-primary-dark"
+                className="text-white px-4 py-3 hover:bg-primary-hover"
                 onClick={() => setIsMenuOpen(false)}
               >
-                CONTATO
+                CONTACT
               </a>
             </nav>
           </div>
@@ -68,25 +70,26 @@ export const Header = () => {
       </header>
 
       {/* Desktop Header */}
-      <header className="hidden md:flex bg-primary h-16 items-center justify-center">
-        <nav className="flex gap-16">
+      <header className="hidden md:flex bg-nav-bg h-16 items-center justify-between px-8">
+        <h1 className="text-white font-medium">{restaurantData.name}</h1>
+        <nav className="flex gap-8">
           <a
             href="/menu"
-            className="text-white hover:text-gray-200 font-medium"
+            className="text-white hover:text-gray-200 transition-colors"
           >
             MENU
           </a>
           <a
-            href="/login"
-            className="text-white hover:text-gray-200 font-medium"
+            href="/about"
+            className="text-white hover:text-gray-200 transition-colors"
           >
-            ENTRAR
+            ABOUT
           </a>
           <a
             href="/contact"
-            className="text-white hover:text-gray-200 font-medium"
+            className="text-white hover:text-gray-200 transition-colors"
           >
-            CONTATO
+            CONTACT
           </a>
         </nav>
       </header>

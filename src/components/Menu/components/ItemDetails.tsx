@@ -5,6 +5,7 @@ import { useBasket } from "../../../hooks/useBasket";
 import { ReactComponent as CloseIcon } from "../../../assets/close.svg";
 import { QuantityControl } from "../../QuantityControl";
 import { usePreventScroll } from "../../../hooks/usePreventScroll";
+import { useRestaurant } from "../../../contexts/RestaurantContext";
 
 interface ItemDetailsProps {
   item: MenuItemType;
@@ -23,11 +24,12 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
   );
   const { addToBasket } = useBasket();
   const { t } = useTranslation();
+  const { restaurantData } = useRestaurant();
   usePreventScroll(isOpen, false);
 
   const getPrice = () => {
     const basePrice = selectedSize ? selectedSize.price : item.price;
-    return (basePrice * quantity).toFixed(2);
+    return `${restaurantData.currency} ${(basePrice * quantity).toFixed(2)}`;
   };
 
   const handleAddToBasket = () => {
@@ -108,7 +110,7 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
               className="btn-primary w-full mt-[10px]"
             >
               {t("itemDetails.addToBasket")} •{" "}
-              {t("common.currency", { value: getPrice() })}
+              {getPrice()}
             </button>
           </div>
         </div>
