@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MenuItem as MenuItemType } from "../../../types";
 import { useBasket } from "../../../hooks/useBasket";
 import { ReactComponent as CloseIcon } from "../../../assets/close.svg";
 import { QuantityControl } from "../../QuantityControl";
+import { usePreventScroll } from "../../../hooks/usePreventScroll";
 
 interface ItemDetailsProps {
   item: MenuItemType;
@@ -20,18 +21,7 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
     item.modifiers?.[0]?.items?.[0]
   );
   const { addToBasket } = useBasket();
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
+  usePreventScroll(isOpen, false);
 
   const getPrice = () => {
     const basePrice = selectedSize ? selectedSize.price : item.price;

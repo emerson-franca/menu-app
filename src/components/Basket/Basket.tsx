@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useBasket } from "../../hooks/useBasket";
 import { BasketItem } from "./BasketItem";
 import { styles } from "./styles";
+import { usePreventScroll } from "../../hooks/usePreventScroll";
 
 interface BasketProps {
   isOpen: boolean;
@@ -10,17 +11,7 @@ interface BasketProps {
 
 const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
   const { items, total } = useBasket();
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
+  usePreventScroll(isOpen);
 
   if (items.length === 0) {
     return (
@@ -38,7 +29,7 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
       />
       <div
         className={`
-        h-full md:bg-white md:rounded-lg md:shadow-sm md:p-6 md:static md:transform-none
+        h-full md:bg-white md:rounded-lg md:shadow-sm  md:static md:transform-none
         fixed bottom-0 left-0 right-0 bg-white transform transition-transform duration-300 ease-in-out
         ${isOpen ? "translate-y-0" : "translate-y-full"}
       `}
@@ -46,7 +37,7 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
         <div className="flex flex-col h-full">
           <div className={styles.basketHeader}>
             <h2 className={styles.basketTitle}>Basket</h2>
-            <button onClick={onClose} className="text-gray-500">
+            <button onClick={onClose} className="text-gray-500 md:hidden">
               <svg
                 className="w-6 h-6"
                 fill="none"
