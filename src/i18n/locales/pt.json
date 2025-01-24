@@ -4,7 +4,10 @@
     "empty": "Seu carrinho está vazio",
     "subtotal": "Subtotal",
     "total": "Total",
-    "checkout": "Finalizar pedido"
+    "checkout": "Finalizar pedido",
+    "yourBasket": "Seu carrinho",
+    "item_one": "item",
+    "item_other": "itens"
   },
   "itemDetails": {
     "chooseSize": "Escolha o tamanho",

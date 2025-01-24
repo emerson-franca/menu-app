@@ -4,7 +4,10 @@
     "empty": "Your basket is empty",
     "subtotal": "Subtotal",
     "total": "Total",
-    "checkout": "Checkout now"
+    "checkout": "Checkout now",
+    "yourBasket": "Your basket",
+    "item_one": "item",
+    "item_other": "items"
   },
   "itemDetails": {
     "chooseSize": "Choose your size",
