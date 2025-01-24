@@ -1,6 +1,7 @@
 import React from "react";
 import { useBasket } from "../../hooks/useBasket";
 import { BasketItem } from "./BasketItem";
+import { styles } from "./styles";
 
 interface BasketProps {
   isOpen: boolean;
@@ -26,14 +27,14 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
       />
       <div
         className={`
-        md:bg-white md:rounded-lg md:shadow-sm md:p-6 md:static md:transform-none
+        h-full md:bg-white md:rounded-lg md:shadow-sm md:p-6 md:static md:transform-none
         fixed bottom-0 left-0 right-0 bg-white transform transition-transform duration-300 ease-in-out
         ${isOpen ? "translate-y-0" : "translate-y-full"}
       `}
       >
-        <div className="p-4 md:p-0">
-          <div className="md:hidden flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Your Basket</h2>
+        <div className="">
+          <div className={styles.basketHeader}>
+            <h2 className={styles.basketTitle}>Basket</h2>
             <button onClick={onClose} className="text-gray-500">
               <svg
                 className="w-6 h-6"
@@ -60,14 +61,22 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
             ))}
           </div>
 
-          <div className="border-t pt-4">
-            <div className="flex justify-between items-center mb-4">
-              <span className="font-semibold">Total</span>
-              <span className="font-semibold">R$ {total.toFixed(2)}</span>
+          <div className="pt-4">
+            <div className={styles.subtotalContainer}>
+              <span className={styles.subtotalText}>Subtotal</span>
+              <span className={styles.subtotalValue}>
+                R$ {total.toFixed(2)}
+              </span>
             </div>
-            <button className="btn-primary w-full">
-              Checkout now • R$ {total.toFixed(2)}
-            </button>
+            <div className={styles.totalContainer}>
+              <span className={styles.totalText}>Total</span>
+              <span className={styles.totalValue}>R$ {total.toFixed(2)}</span>
+            </div>
+            <div className={styles.checkoutContainer}>
+              <button className={styles.checkoutButton}>
+                Checkout now • R$ {total.toFixed(2)}
+              </button>
+            </div>
           </div>
         </div>
       </div>

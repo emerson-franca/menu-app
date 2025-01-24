@@ -28,7 +28,7 @@ export const styles = {
     "font-roboto font-bold text-xl leading-7 text-right text-gray-900",
 
   checkoutContainer: "mt-auto pt-4 pb-20 px-4",
-  checkoutButton: "btn-primary",
+  checkoutButton: "btn-primary w-full",
   checkoutText:
     "font-roboto text-lg font-medium leading-[21.09px] tracking-wide",
 
