@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useBasket } from "../../hooks/useBasket";
 import { BasketItem } from "./BasketItem";
 import { styles } from "./styles";
@@ -10,6 +10,17 @@ interface BasketProps {
 
 const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
   const { items, total } = useBasket();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   if (items.length === 0) {
     return (
@@ -32,7 +43,7 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
         ${isOpen ? "translate-y-0" : "translate-y-full"}
       `}
       >
-        <div className="">
+        <div className="flex flex-col h-full">
           <div className={styles.basketHeader}>
             <h2 className={styles.basketTitle}>Basket</h2>
             <button onClick={onClose} className="text-gray-500">
@@ -52,16 +63,15 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
             </button>
           </div>
 
-          <div className="space-y-4 mb-4">
-            {items.map((item) => (
-              <BasketItem
-                key={`${item.id}-${item.selectedModifiers?.id || "default"}`}
-                item={item}
-              />
-            ))}
-          </div>
-
-          <div className="pt-4">
+          <div className="flex-1 overflow-auto bg-gray-50">
+            <div className="mb-4">
+              {items.map((item) => (
+                <BasketItem
+                  key={`${item.id}-${item.selectedModifiers?.id || "default"}`}
+                  item={item}
+                />
+              ))}
+            </div>
             <div className={styles.subtotalContainer}>
               <span className={styles.subtotalText}>Subtotal</span>
               <span className={styles.subtotalValue}>
@@ -72,11 +82,11 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
               <span className={styles.totalText}>Total</span>
               <span className={styles.totalValue}>R$ {total.toFixed(2)}</span>
             </div>
-            <div className={styles.checkoutContainer}>
-              <button className={styles.checkoutButton}>
-                Checkout now • R$ {total.toFixed(2)}
-              </button>
-            </div>
+          </div>
+          <div className={styles.checkoutContainer}>
+            <button className={styles.checkoutButton}>
+              Checkout now • R$ {total.toFixed(2)}
+            </button>
           </div>
         </div>
       </div>

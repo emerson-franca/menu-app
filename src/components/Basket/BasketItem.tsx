@@ -31,6 +31,7 @@ export const BasketItem: React.FC<BasketItemProps> = ({ item }) => {
             )}
             <div className={styles.basketItemControls}>
               <QuantityControl
+                size="small"
                 quantity={item.quantity || 1}
                 onDecrease={() => decreaseQuantity(item.id)}
                 onIncrease={() => increaseQuantity(item.id)}

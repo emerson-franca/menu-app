@@ -9,7 +9,7 @@ export const styles = {
   basketTitle:
     "flex-1 font-roboto text-lg font-medium leading-[21.09px] tracking-wide text-center",
 
-  basketItem: "p-4 flex justify-between items-center w-full border-b",
+  basketItem: "p-4 flex justify-between items-center w-full border-b bg-white",
   basketItemName: "font-medium",
   basketItemModifier:
     "font-roboto font-normal text-base leading-[19px] flex-1 text-gray-300",
@@ -27,7 +27,7 @@ export const styles = {
   totalValue:
     "font-roboto font-bold text-xl leading-7 text-right text-gray-900",
 
-  checkoutContainer: "mt-auto pt-4 pb-20 px-4",
+  checkoutContainer: "mt-auto pt-4 pb-6 px-4 bg-gray-50",
   checkoutButton: "btn-primary w-full",
   checkoutText:
     "font-roboto text-lg font-medium leading-[21.09px] tracking-wide",

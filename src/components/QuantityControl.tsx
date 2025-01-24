@@ -1,8 +1,11 @@
+import React from "react";
+
 interface QuantityControlProps {
   quantity: number;
   onIncrease: () => void;
   onDecrease: () => void;
   className?: string;
+  size?: "small" | "large";
 }
 
 export const QuantityControl: React.FC<QuantityControlProps> = ({
@@ -10,16 +13,23 @@ export const QuantityControl: React.FC<QuantityControlProps> = ({
   onIncrease,
   onDecrease,
   className = "",
+  size = "large",
 }) => {
+  const buttonSize = size === "small" ? "w-5 h-5" : "w-8 h-8";
+  const iconSize = size === "small" ? "w-3 h-3" : "w-5 h-5";
+
   return (
-    <div className={`flex items-center gap-4 ${className}`}>
+    <div
+      className={`flex items-center ${
+        size === "small" ? "gap-2" : "gap-4"
+      } ${className}`}
+    >
       <button
         onClick={onDecrease}
-        className="w-8 h-8 rounded-full border-2 bg-primary text-white font-bold flex items-center justify-center"
+        className={`${buttonSize} flex items-center justify-center rounded-full  bg-primary text-white font-bold`}
       >
         <svg
-          width="19"
-          height="4"
+          className={iconSize}
           viewBox="0 0 19 4"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -34,14 +44,19 @@ export const QuantityControl: React.FC<QuantityControlProps> = ({
           />
         </svg>
       </button>
-      <span className="text-lg font-medium w-4 text-center">{quantity}</span>
+      <span
+        className={`text-lg font-medium w-4 text-center ${
+          size === "small" ? "text-sm" : ""
+        }`}
+      >
+        {quantity}
+      </span>
       <button
         onClick={onIncrease}
-        className="w-8 h-8 rounded-full border-2 bg-primary text-white font-bold flex items-center justify-center"
+        className={`${buttonSize} flex items-center justify-center rounded-full  bg-primary text-white font-bold`}
       >
         <svg
-          width="19"
-          height="18"
+          className={iconSize}
           viewBox="0 0 19 18"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
