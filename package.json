@@ -6,8 +6,11 @@
     "@reduxjs/toolkit": "^2.5.0",
     "cra-template-redux": "2.0.0",
     "http-proxy-middleware": "^3.0.3",
+    "i18next": "^24.2.1",
+    "i18next-browser-languagedetector": "^8.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-i18next": "^15.4.0",
     "react-redux": "^9.2.0",
     "react-scripts": "5.0.1"
   },

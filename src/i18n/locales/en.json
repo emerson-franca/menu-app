@@ -1,0 +1,17 @@
+{
+  "basket": {
+    "title": "Basket",
+    "empty": "Your basket is empty",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Checkout now"
+  },
+  "itemDetails": {
+    "chooseSize": "Choose your size",
+    "selectOption": "Select 1 option",
+    "addToBasket": "Add to basket"
+  },
+  "common": {
+    "currency": "$ {{value}}"
+  }
+}

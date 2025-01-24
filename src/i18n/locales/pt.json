@@ -1,0 +1,17 @@
+{
+  "basket": {
+    "title": "Carrinho",
+    "empty": "Seu carrinho está vazio",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Finalizar pedido"
+  },
+  "itemDetails": {
+    "chooseSize": "Escolha o tamanho",
+    "selectOption": "Selecione 1 opção",
+    "addToBasket": "Adicionar ao carrinho"
+  },
+  "common": {
+    "currency": "R$ {{value}}"
+  }
+}
