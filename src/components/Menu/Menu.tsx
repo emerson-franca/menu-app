@@ -3,6 +3,7 @@ import { useMenu } from "../../hooks/useMenu";
 import { CategoryTabs, MenuSection } from "./components";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { useBasket } from "../../hooks/useBasket";
+import { useTranslation } from "react-i18next";
 import { MenuProps } from "./types";
 
 export const Menu: React.FC<MenuProps> = ({
@@ -22,6 +23,7 @@ export const Menu: React.FC<MenuProps> = ({
     filteredSections,
   } = useMenu();
   const { items } = useBasket();
+  const { t } = useTranslation();
 
   if (status === "loading") {
     return <div className="p-4 text-center">Loading...</div>;
@@ -61,10 +63,9 @@ export const Menu: React.FC<MenuProps> = ({
             className="btn-primary py-3 px-6"
           >
             <span>
-              Your basket • {items.length}{" "}
-              {items.length === 1 ? "item" : "items"}
+              {t("basket.yourBasket")} • {items.length}{" "}
+              {t("basket.item", { count: items.length })}
             </span>
-            {isBasketVisible && <span className="ml-2">▼</span>}
           </button>
         )}
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MenuItem as MenuItemType } from "../../../types";
 import { useBasket } from "../../../hooks/useBasket";
 import { ReactComponent as CloseIcon } from "../../../assets/close.svg";
@@ -21,6 +22,7 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
     item.modifiers?.[0]?.items?.[0]
   );
   const { addToBasket } = useBasket();
+  const { t } = useTranslation();
   usePreventScroll(isOpen, false);
 
   const getPrice = () => {
@@ -61,8 +63,12 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
           {item?.modifiers && (
             <div className="mb-6 bg-white rounded-lg">
               <div className="bg-gray-50 px-6 py-4">
-                <h3 className="text-section-title mb-1">Choose your size</h3>
-                <p className="text-section-subtitle">Select 1 option</p>
+                <h3 className="text-section-title mb-1">
+                  {t("itemDetails.chooseSize")}
+                </h3>
+                <p className="text-section-subtitle">
+                  {t("itemDetails.selectOption")}
+                </p>
               </div>
               <div className="flex flex-col gap-4 px-6 py-4">
                 {item.modifiers[0].items.map((option) => (
@@ -73,7 +79,9 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
                     <div className="flex flex-col">
                       <span className="text-base">{option.name}</span>
                       <span className="text-gray-600">
-                        R${option.price.toFixed(2)}
+                        {t("common.currency", {
+                          value: option.price.toFixed(2),
+                        })}
                       </span>
                     </div>
                     <input
@@ -99,7 +107,8 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
               onClick={handleAddToBasket}
               className="btn-primary w-full mt-[10px]"
             >
-              Add to Order • R$ {getPrice()}
+              {t("itemDetails.addToBasket")} •{" "}
+              {t("common.currency", { value: getPrice() })}
             </button>
           </div>
         </div>

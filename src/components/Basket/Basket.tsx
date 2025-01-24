@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useBasket } from "../../hooks/useBasket";
 import { BasketItem } from "./BasketItem";
 import { styles } from "./styles";
@@ -11,12 +12,13 @@ interface BasketProps {
 
 const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
   const { items, total } = useBasket();
+  const { t } = useTranslation();
   usePreventScroll(isOpen);
 
   if (items.length === 0) {
     return (
       <div className="md:bg-white md:rounded-lg md:shadow-sm md:p-6 text-gray-500">
-        Your basket is empty
+        {t("basket.empty")}
       </div>
     );
   }
@@ -29,14 +31,14 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
       />
       <div
         className={`
-        h-full md:bg-white md:rounded-lg md:shadow-sm  md:static md:transform-none
+        h-full md:bg-white md:rounded-lg md:shadow-sm md:static md:transform-none
         fixed bottom-0 left-0 right-0 bg-white transform transition-transform duration-300 ease-in-out
         ${isOpen ? "translate-y-0" : "translate-y-full"}
       `}
       >
         <div className="flex flex-col h-full">
           <div className={styles.basketHeader}>
-            <h2 className={styles.basketTitle}>Basket</h2>
+            <h2 className={styles.basketTitle}>{t("basket.title")}</h2>
             <button onClick={onClose} className="text-gray-500 md:hidden">
               <svg
                 className="w-6 h-6"
@@ -64,19 +66,21 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
               ))}
             </div>
             <div className={styles.subtotalContainer}>
-              <span className={styles.subtotalText}>Subtotal</span>
+              <span className={styles.subtotalText}>{t("basket.subtotal")}</span>
               <span className={styles.subtotalValue}>
-                R$ {total.toFixed(2)}
+                {t("common.currency", { value: total.toFixed(2) })}
               </span>
             </div>
             <div className={styles.totalContainer}>
-              <span className={styles.totalText}>Total</span>
-              <span className={styles.totalValue}>R$ {total.toFixed(2)}</span>
+              <span className={styles.totalText}>{t("basket.total")}</span>
+              <span className={styles.totalValue}>
+                {t("common.currency", { value: total.toFixed(2) })}
+              </span>
             </div>
           </div>
           <div className={styles.checkoutContainer}>
             <button className={styles.checkoutButton}>
-              Checkout now • R$ {total.toFixed(2)}
+              {t("basket.checkout")} • {t("common.currency", { value: total.toFixed(2) })}
             </button>
           </div>
         </div>
