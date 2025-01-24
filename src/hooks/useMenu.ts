@@ -4,7 +4,7 @@ import { fetchMenuData } from "../features/restaurant/restaurantSlice";
 
 export const useMenu = () => {
   const dispatch = useAppDispatch();
-  const { menuData, status, error } = useAppSelector(
+  const { menuData, menuStatus: status, menuError: error } = useAppSelector(
     (state) => state.restaurant
   );
   const [activeTab, setActiveTab] = useState<string>("");

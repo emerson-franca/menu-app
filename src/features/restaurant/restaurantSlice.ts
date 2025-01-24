@@ -5,7 +5,9 @@ interface RestaurantState {
   restaurantData: RestaurantData | null;
   menuData: MenuData | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  menuStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
+  menuError: string | null;
 }
 
 const fetchWithHeaders = async (url: string) => {
@@ -40,7 +42,9 @@ const initialState: RestaurantState = {
   restaurantData: null,
   menuData: null,
   status: 'idle',
+  menuStatus: 'idle',
   error: null,
+  menuError: null,
 };
 
 const restaurantSlice = createSlice({
@@ -60,8 +64,16 @@ const restaurantSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message ?? 'Unknown error';
       })
+      .addCase(fetchMenuData.pending, (state) => {
+        state.menuStatus = 'loading';
+      })
       .addCase(fetchMenuData.fulfilled, (state, action) => {
+        state.menuStatus = 'succeeded';
         state.menuData = action.payload;
+      })
+      .addCase(fetchMenuData.rejected, (state, action) => {
+        state.menuStatus = 'failed';
+        state.menuError = action.error.message ?? 'Unknown error';
       });
   },
 });
