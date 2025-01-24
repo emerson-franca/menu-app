@@ -1,21 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import Home from "./pages/Home";
-import { useTranslation } from "react-i18next";
+import { BrowserRouter } from "react-router-dom";
 import { useEffect } from "react";
 import { RestaurantProvider } from "./contexts/RestaurantContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { fetchRestaurantData } from "./features/restaurant/restaurantSlice";
-
-const LanguageRoute = ({ lang }: { lang: string }) => {
-  const { i18n } = useTranslation();
-  const location = useLocation();
-
-  useEffect(() => {
-    i18n.changeLanguage(lang);
-  }, [i18n, lang, location.pathname]);
-
-  return <Home />;
-};
+import { AppRoutes } from "./routes/AppRoutes";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -39,22 +28,13 @@ function App() {
 
   return (
     <RestaurantProvider data={restaurantData}>
-      <BrowserRouter>
-        <div className="flex">
-          <Routes>
-            <Route
-              path="/"
-              element={<Navigate to={`/${getUserLocale()}`} replace />}
-            />
-            <Route path="/en" element={<LanguageRoute lang="en" />} />
-            <Route path="/pt" element={<LanguageRoute lang="pt" />} />
-            <Route
-              path="*"
-              element={<Navigate to={`/${getUserLocale()}`} replace />}
-            />
-          </Routes>
-        </div>
-      </BrowserRouter>
+      <ThemeProvider>
+        <BrowserRouter>
+          <div className="flex bg-theme-background">
+            <AppRoutes getUserLocale={getUserLocale} />
+          </div>
+        </BrowserRouter>
+      </ThemeProvider>
     </RestaurantProvider>
   );
 }
