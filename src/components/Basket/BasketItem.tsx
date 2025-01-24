@@ -2,7 +2,7 @@ import React from "react";
 import { MenuItem } from "../../types";
 import { styles } from "./styles";
 import { useBasket } from "../../hooks/useBasket";
-import { QuantityControl } from "../QuantityControl";
+import { QuantityControl } from "../QuantityControl/QuantityControl";
 
 interface BasketItemProps {
   item: MenuItem & {

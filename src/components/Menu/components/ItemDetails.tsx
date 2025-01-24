@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { MenuItem as MenuItemType } from "../../../types";
 import { useBasket } from "../../../hooks/useBasket";
 import { ReactComponent as CloseIcon } from "../../../assets/close.svg";
-import { QuantityControl } from "../../QuantityControl";
+import { QuantityControl } from "../../QuantityControl/QuantityControl";
 import { usePreventScroll } from "../../../hooks/usePreventScroll";
 import { useRestaurant } from "../../../contexts/RestaurantContext";
 
@@ -109,8 +109,7 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
               onClick={handleAddToBasket}
               className="btn-primary w-full mt-[10px]"
             >
-              {t("itemDetails.addToBasket")} •{" "}
-              {getPrice()}
+              {t("itemDetails.addToBasket")} • {getPrice()}
             </button>
           </div>
         </div>
