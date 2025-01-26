@@ -77,9 +77,7 @@ const basketSlice = createSlice({
 
       if (itemIndex !== -1) {
         const item = state.items[itemIndex];
-        const basePrice = item.price / (item.quantity || 1);
         item.quantity = quantity;
-        item.price = basePrice * quantity;
 
         state.total = state.items.reduce((sum, item) => sum + item.price, 0);
       }

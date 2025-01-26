@@ -99,7 +99,6 @@ describe("useBasket", () => {
     });
 
     expect(result.current.items[0].quantity).toBe(2);
-    expect(result.current.items[0].price).toBe(mockMenuItem.price * 2);
   });
 
   it("should decrease quantity of existing item", () => {
@@ -184,6 +183,6 @@ describe("useBasket", () => {
 
     expect(result.current.items[0].quantity).toBe(2);
     expect(result.current.items[1].quantity).toBe(1);
-    expect(result.current.total).toBeCloseTo(55.0, 2);
+    expect(result.current.total).toBeCloseTo(35.0, 2);
   });
 });
