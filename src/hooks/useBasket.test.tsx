@@ -154,7 +154,7 @@ describe("useBasket", () => {
     });
 
     expect(result.current.getItemQuantity(mockMenuItem.id)).toBe(2);
-    expect(result.current.getItemQuantity(999)).toBe(0); // Non-existent item
+    expect(result.current.getItemQuantity(999)).toBe(0);
   });
 
   it("should calculate total correctly with multiple items", () => {

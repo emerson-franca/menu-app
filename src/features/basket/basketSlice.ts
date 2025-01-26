@@ -4,6 +4,7 @@ import { BasketState, MenuItem, ModifierItem } from "../../types";
 interface AddItemPayload {
   item: MenuItem;
   modifiers?: ModifierItem;
+  quantity?: number;
 }
 
 const initialState: BasketState = {
@@ -16,7 +17,7 @@ const basketSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<AddItemPayload>) => {
-      const { item, modifiers } = action.payload;
+      const { item, modifiers, quantity } = action.payload;
       const itemPrice = modifiers ? item.price + modifiers.price : item.price;
 
       const existingItemIndex = state.items.findIndex((basketItem) =>
@@ -35,7 +36,7 @@ const basketSlice = createSlice({
           id: modifiers ? modifiers.id : item.id,
           selectedModifiers: modifiers,
           price: itemPrice,
-          quantity: 1,
+          quantity: quantity || 1,
         });
       }
 

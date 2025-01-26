@@ -33,7 +33,7 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
   };
 
   const handleAddToBasket = () => {
-    addToBasket(item, selectedSize);
+    addToBasket(item, selectedSize, quantity);
     onClose();
   };
 
@@ -41,7 +41,7 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white w-full h-full md:h-auto md:w-full md:max-w-lg md:mx-4 md:rounded-lg overflow-hidden flex flex-col">
+      <div className="bg-white w-full h-full md:h-auto md:w-full md:max-w-lg md:mx-4  overflow-hidden flex flex-col">
         <div className="relative flex-shrink-0">
           <img
             src={item.images?.[0]?.image || "/placeholder-image.jpg"}

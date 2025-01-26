@@ -43,8 +43,12 @@ export const useBasket = () => {
     }
   };
 
-  const addToBasket = (item: MenuItem, modifiers?: ModifierItem) => {
-    dispatch(addItem({ item, modifiers }));
+  const addToBasket = (
+    item: MenuItem,
+    modifiers?: ModifierItem,
+    quantity?: number
+  ) => {
+    dispatch(addItem({ item, modifiers, quantity }));
   };
 
   const removeFromBasket = (id: number, selectedModifiers?: ModifierItem) => {
