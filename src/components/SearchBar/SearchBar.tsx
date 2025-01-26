@@ -7,8 +7,14 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   setSearchQuery,
 }) => {
   return (
-    <div className="p-4" data-testid="search-container">
-      <div className="relative" data-testid="search-wrapper">
+    <div
+      className="p-4 md:p-0  md:py-1.5 md:bg-gray-100"
+      data-testid="search-container"
+    >
+      <div
+        className="relative md:container   md:mx-auto"
+        data-testid="search-wrapper"
+      >
         <SearchIcon
           data-testid="search-icon"
           className="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2"
