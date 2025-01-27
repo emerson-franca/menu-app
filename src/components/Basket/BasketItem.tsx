@@ -3,6 +3,7 @@ import { MenuItem, ModifierItem } from "../../types";
 import { styles } from "./styles";
 import { useBasket } from "../../hooks/useBasket";
 import { QuantityControl } from "../QuantityControl/QuantityControl";
+import { useTranslation } from "react-i18next";
 
 interface BasketItemProps {
   item: MenuItem & {
@@ -13,6 +14,7 @@ interface BasketItemProps {
 
 export const BasketItem: React.FC<BasketItemProps> = ({ item }) => {
   const { increaseQuantity, decreaseQuantity } = useBasket();
+  const { t } = useTranslation();
 
   const handleIncreaseQuantity = () => {
     increaseQuantity(item.id, item.selectedModifiers?.id);
@@ -45,7 +47,9 @@ export const BasketItem: React.FC<BasketItemProps> = ({ item }) => {
           </div>
 
           <p className={styles.basketItemPrice}>
-            ${(item.price * (item?.quantity || 1)).toFixed(2)}
+            {t("common.currency", {
+              value: (item.price * (item?.quantity || 1)).toFixed(2),
+            })}
           </p>
         </div>
       </div>

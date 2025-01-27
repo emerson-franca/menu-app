@@ -1,23 +1,38 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { useBasket } from "../../hooks/useBasket";
 import Basket from "./Basket";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import basketReducer from "../../features/basket/basketSlice";
 
 jest.mock("../../hooks/useBasket");
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
-    t: (key: string) => {
+    t: (key: string, params?: any) => {
       const translations: { [key: string]: string } = {
-        "basket.empty": "Your basket is empty",
-        "basket.title": "Your Order",
+        "basket.empty": "Seu carrinho está vazio",
+        "basket.title": "Carrinho",
         "basket.subtotal": "Subtotal",
         "basket.total": "Total",
-        "basket.checkout": "Checkout",
-        "common.currency": "${value}",
+        "basket.checkout": "Finalizar pedido",
       };
+      if (key === "common.currency") {
+        return `R$ ${params.value}`;
+      }
       return translations[key] || key;
     },
   }),
 }));
+
+const store = configureStore({
+  reducer: {
+    basket: basketReducer,
+  },
+});
+
+const renderWithProviders = (component: React.ReactElement) => {
+  return render(<Provider store={store}>{component}</Provider>);
+};
 
 describe("Basket", () => {
   const mockOnClose = jest.fn();
@@ -32,11 +47,11 @@ describe("Basket", () => {
       total: 0,
     });
 
-    render(<Basket isOpen={true} onClose={mockOnClose} />);
-    expect(screen.getByText("Your basket is empty")).toBeInTheDocument();
+    renderWithProviders(<Basket isOpen={true} onClose={mockOnClose} />);
+    expect(screen.getByText("Seu carrinho está vazio")).toBeInTheDocument();
   });
 
-  it("renders basket items when there are items", () => {
+  it("renders basket items correctly", () => {
     const mockItems = [
       {
         id: 1,
@@ -60,9 +75,12 @@ describe("Basket", () => {
       total: 21.98,
     });
 
-    render(<Basket isOpen={true} onClose={mockOnClose} />);
+    renderWithProviders(<Basket isOpen={true} onClose={mockOnClose} />);
+
+    const button = screen.getByTestId("checkout-button");
+
     expect(screen.getByText("Pizza")).toBeInTheDocument();
-    expect(screen.getByText("$21.98")).toBeInTheDocument();
+    expect(button).toHaveTextContent("Finalizar pedido • R$ 21.98");
   });
 
   it("calls onClose when clicking the close button", () => {
@@ -71,7 +89,7 @@ describe("Basket", () => {
       total: 0,
     });
 
-    render(<Basket isOpen={true} onClose={mockOnClose} />);
+    renderWithProviders(<Basket isOpen={true} onClose={mockOnClose} />);
     const closeButton = screen.queryByRole("button");
     if (closeButton) {
       fireEvent.click(closeButton);
@@ -112,8 +130,8 @@ describe("Basket", () => {
       total: 12.99,
     });
 
-    render(<Basket isOpen={true} onClose={mockOnClose} />);
+    renderWithProviders(<Basket isOpen={true} onClose={mockOnClose} />);
     expect(screen.getByText("Pizza")).toBeInTheDocument();
-    expect(screen.getByText("$10.99")).toBeInTheDocument();
+    expect(screen.getByText("R$ 10.99")).toBeInTheDocument();
   });
 });

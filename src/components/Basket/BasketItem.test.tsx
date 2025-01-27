@@ -4,6 +4,8 @@ import { BasketItem } from "./BasketItem";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import basketReducer from "../../features/basket/basketSlice";
+import i18n from "../../i18n/config";
+import { initReactI18next } from "react-i18next";
 
 const mockItem = {
   id: 1,
@@ -32,6 +34,17 @@ const mockItemWithModifier = {
     available: true,
   },
 };
+
+i18n.use(initReactI18next).init({
+  lng: "en",
+  resources: {
+    en: {
+      translation: {
+        "common.currency": "${{value}}",
+      },
+    },
+  },
+});
 
 const renderWithProviders = (
   component: React.ReactElement,
