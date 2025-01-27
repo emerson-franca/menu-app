@@ -1,7 +1,6 @@
 import React from "react";
 import { useMenu } from "../../hooks/useMenu";
 import { CategoryTabs, MenuSection } from "./components";
-import { SearchBar } from "../SearchBar/SearchBar";
 import { useBasket } from "../../hooks/useBasket";
 import { useTranslation } from "react-i18next";
 import { MenuProps } from "./types";
@@ -9,13 +8,12 @@ import { MenuProps } from "./types";
 export const Menu: React.FC<MenuProps> = ({
   isBasketVisible,
   setIsBasketVisible,
+  searchQuery,
 }) => {
   const {
     menuData,
     status,
     error,
-    searchQuery,
-    setSearchQuery,
     activeTab,
     expandedSections,
     toggleSection,
@@ -38,8 +36,7 @@ export const Menu: React.FC<MenuProps> = ({
   }
 
   return (
-    <div className="bg-theme-background md:rounded-lg md:shadow-sm">
-      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+    <div className="bg-white  md:shadow-2xl">
       <CategoryTabs
         sections={menuData.sections}
         activeTab={activeTab}
