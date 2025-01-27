@@ -37,7 +37,7 @@ By default, the application will detect and use your browser's language setting.
 1. Clone the repository:
 
 ```bash
-git clone [your-repository-url]
+git clone [https://github.com/emerson-franca/menu-app]
 cd restaurant-app
 ```
 
