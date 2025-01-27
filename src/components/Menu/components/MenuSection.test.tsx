@@ -96,50 +96,67 @@ describe("MenuSection", () => {
   const mockToggleSection = jest.fn();
   const expandedSections = { "Test Section": true };
 
+  const renderSection = (searchQuery = "") => {
+    return renderWithProviders(
+      <MenuSection
+        section={mockSection}
+        searchQuery={searchQuery}
+        expandedSections={expandedSections}
+        toggleSection={mockToggleSection}
+      />
+    );
+  };
+
   it("renders section name", () => {
-    renderWithProviders(
-      <MenuSection
-        section={mockSection}
-        searchQuery=""
-        expandedSections={expandedSections}
-        toggleSection={mockToggleSection}
-      />
-    );
-
-    expect(screen.getByText("Test Section")).toBeInTheDocument();
-  });
-
-  it("toggles section when clicked", () => {
-    renderWithProviders(
-      <MenuSection
-        section={mockSection}
-        searchQuery=""
-        expandedSections={expandedSections}
-        toggleSection={mockToggleSection}
-      />
-    );
-
-    fireEvent.click(screen.getByText("Test Section"));
-    expect(mockToggleSection).toHaveBeenCalledWith("Test Section");
+    renderSection();
+    expect(screen.getByRole('heading', { name: 'Test Section' })).toBeInTheDocument();
+    expect(screen.getByTestId('menu-section-Test Section')).toBeInTheDocument();
   });
 
   it("filters items based on search query", () => {
-    renderWithProviders(
-      <MenuSection
-        section={mockSection}
-        searchQuery="Test Item"
-        expandedSections={expandedSections}
-        toggleSection={mockToggleSection}
-      />
-    );
-
+    renderSection("Test Item");
+    
+    expect(screen.getByTestId('menu-section-Test Section')).toBeInTheDocument();
     expect(screen.getByText("Test Item")).toBeInTheDocument();
     expect(screen.queryByText("Hidden Item")).not.toBeInTheDocument();
   });
 
+  it("hides section when no items match search query", () => {
+    renderSection("Non-existent Item");
+
+    expect(screen.queryByTestId('menu-section-Test Section')).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Test Section' })).not.toBeInTheDocument();
+    expect(screen.queryByText('Test Item')).not.toBeInTheDocument();
+    expect(screen.queryByText('Hidden Item')).not.toBeInTheDocument();
+  });
+
+  it("shows all items when search query is empty", () => {
+    renderSection("");
+
+    expect(screen.getByTestId('menu-section-Test Section')).toBeInTheDocument();
+    expect(screen.getByText("Test Item")).toBeInTheDocument();
+    expect(screen.getByText("Hidden Item")).toBeInTheDocument();
+  });
+
+  it("filters items based on description", () => {
+    renderSection("should be hidden");
+
+    expect(screen.getByTestId('menu-section-Test Section')).toBeInTheDocument();
+    expect(screen.queryByText("Test Item")).not.toBeInTheDocument();
+    expect(screen.getByText("Hidden Item")).toBeInTheDocument();
+  });
+
+  it("toggles section visibility when clicked", () => {
+    renderSection("");
+    
+    const button = screen.getByRole('button', { name: 'Toggle Test Section section' });
+    fireEvent.click(button);
+    expect(mockToggleSection).toHaveBeenCalledWith("Test Section");
+  });
+
   it("shows correct icon based on expanded state", () => {
     const collapsedSections = { "Test Section": false };
-
+    
     renderWithProviders(
       <MenuSection
         section={mockSection}
@@ -149,6 +166,6 @@ describe("MenuSection", () => {
       />
     );
 
-    expect(screen.getByRole("button")).toBeInTheDocument();
+    expect(screen.getByTestId('menu-section-Test Section')).toBeInTheDocument();
   });
 });

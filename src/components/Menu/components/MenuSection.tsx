@@ -10,11 +10,23 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
   expandedSections,
   toggleSection,
 }) => {
+  const filteredItems = section.items.filter(
+    (item) =>
+      !searchQuery ||
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.description?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  if (searchQuery && filteredItems.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="py-8">
+    <div className="py-8" data-testid={`menu-section-${section.name}`}>
       <button
         onClick={() => toggleSection(section.name)}
         className="w-full flex justify-between items-center mb-3"
+        aria-label={`Toggle ${section.name} section`}
       >
         <h1 className="font-roboto text-2xl font-medium leading-[28.13px] tracking-[0.5px] text-left">
           {section.name}
@@ -28,17 +40,9 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
 
       {expandedSections[section.name] && (
         <div>
-          {section.items
-            .filter(
-              (item) =>
-                item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                item.description
-                  ?.toLowerCase()
-                  .includes(searchQuery.toLowerCase())
-            )
-            .map((item) => (
-              <MenuItem key={item.id} item={item} />
-            ))}
+          {filteredItems.map((item) => (
+            <MenuItem key={item.id} item={item} />
+          ))}
         </div>
       )}
     </div>
