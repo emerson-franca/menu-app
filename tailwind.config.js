@@ -5,8 +5,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#4f372f",
-        "primary-dark": "#3a2a24",
+        primary: "var(--color-primary)",
+        "primary-hover": "var(--color-primary-hover)",
+        "primary-dark": "var(--color-primary-hover)",
+        "nav-bg": "var(--color-nav-background)",
+        "theme-bg": "var(--color-background)",
         gray: {
           50: "#F8F9FA",
           100: "#EEEEEE",
@@ -38,7 +41,6 @@ module.exports = {
     preflight: true,
   },
   plugins: [
-    require("@tailwindcss/line-clamp"),
     function ({ addComponents }) {
       addComponents({
         ".btn-primary": {
@@ -52,20 +54,24 @@ module.exports = {
           "@apply text-[24px] font-bold leading-[28.13px] text-[#121212]": {},
         },
         ".text-item-description": {
-          "@apply text-base font-normal leading-[18.75px] tracking-[0.5px] text-gray-600": {},
+          "@apply text-base font-normal leading-[18.75px] tracking-[0.5px] text-gray-600":
+            {},
         },
         ".text-section-title": {
           "@apply text-base font-bold leading-[18.75px] tracking-[0.5px]": {},
         },
         ".text-section-subtitle": {
-          "@apply text-base font-normal leading-[18.75px] tracking-[0.5px] text-gray-500": {},
+          "@apply text-base font-normal leading-[18.75px] tracking-[0.5px] text-gray-500":
+            {},
         },
         '[type="radio"]': {
-          '@apply relative appearance-none w-6 h-6 border-2 border-gray-300 rounded-full checked:border-primary': {},
-          '&:checked::after': {
+          "@apply relative appearance-none w-6 h-6 border-2 border-gray-300 rounded-full checked:border-primary":
+            {},
+          "&:checked::after": {
             content: '""',
-            '@apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full': {},
-          }
+            "@apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full":
+              {},
+          },
         },
       });
     },
