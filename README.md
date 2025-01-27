@@ -13,6 +13,15 @@ A modern, responsive restaurant application built with React, TypeScript, and Re
 - 🧩 **Component Architecture**: Modular and reusable components
 - 🔄 **Routing**: Client-side routing with React Router
 
+## 🌎 Internationalization
+
+This project supports multiple languages 🇺🇸 🇧🇷
+
+By default, the application will detect and use your browser's language setting. However, you can manually switch languages by accessing:
+
+- `/en` - English
+- `/pt` - Portuguese
+
 ## 🛠️ Technology Stack
 
 - React 18
