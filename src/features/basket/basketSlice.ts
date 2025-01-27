@@ -30,10 +30,15 @@ const basketSlice = createSlice({
         const existingItem = state.items[existingItemIndex];
         existingItem.quantity = (existingItem.quantity || 1) + 1;
         existingItem.price = itemPrice;
+
+        if (existingItem.selectedModifiers) {
+          existingItem.selectedModifiers.qty =
+            (existingItem.selectedModifiers.qty || 1) + 1;
+        }
       } else {
         state.items.push({
           ...item,
-          id: modifiers ? modifiers.id : item.id,
+          id: item.id,
           selectedModifiers: modifiers,
           price: itemPrice,
           quantity: quantity || 1,

@@ -10,21 +10,29 @@ export const useBasket = () => {
   const dispatch = useAppDispatch();
   const { items } = useAppSelector((state) => state.basket);
 
-  const increaseQuantity = (itemId: number) => {
-    const item = items.find((item) => item.id === itemId);
+  const increaseQuantity = (itemId: number, modifierId?: number) => {
+    const item = items.find((item) =>
+      item.modifiers
+        ? item.selectedModifiers?.id === modifierId
+        : item.id === itemId && !item.selectedModifiers
+    );
     if (item) {
       dispatch(
         updateQuantity({
           id: itemId,
-          quantity: (item.quantity || 1) + 1,
+          quantity: item.quantity + 1,
           selectedModifiers: item.selectedModifiers,
         })
       );
     }
   };
 
-  const decreaseQuantity = (itemId: number) => {
-    const item = items.find((item) => item.id === itemId);
+  const decreaseQuantity = (itemId: number, modifierId?: number) => {
+    const item = items.find((item) =>
+      item.modifiers
+        ? item.selectedModifiers?.id === modifierId
+        : item.id === itemId && !item.selectedModifiers
+    );
     if (item) {
       const newQuantity = (item.quantity || 1) - 1;
       if (newQuantity === 0) {

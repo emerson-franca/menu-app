@@ -75,11 +75,15 @@ describe("useBasket", () => {
     expect(result.current.items).toHaveLength(1);
     expect(result.current.items[0]).toEqual(
       expect.objectContaining({
-        id: mockModifier.id,
+        id: mockMenuItem.id,
         name: mockMenuItem.name,
         price: mockMenuItem.price + mockModifier.price,
         quantity: 1,
-        selectedModifiers: mockModifier,
+        selectedModifiers: expect.objectContaining(mockModifier),
+        description: mockMenuItem.description,
+        visible: mockMenuItem.visible,
+        alcoholic: mockMenuItem.alcoholic,
+        sku: mockMenuItem.sku,
       })
     );
     expect(result.current.total).toBe(mockMenuItem.price + mockModifier.price);
