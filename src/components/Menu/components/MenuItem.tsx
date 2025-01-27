@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { MenuItem as MenuItemType } from "../../../types";
 import { useAppSelector } from "../../../app/hooks";
 import { ItemDetails } from "./ItemDetails";
@@ -10,9 +10,17 @@ interface MenuItemProps {
 export const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const basketItems = useAppSelector((state) => state.basket.items);
-  const itemInBasket = basketItems.find(
-    (basketItem) => basketItem.id === item.id
-  );
+  const itemInBasket = useMemo(() => {
+    return basketItems.find((basketItem) => {
+      if (item.modifiers && basketItem.modifiers) {
+        return (
+          JSON.stringify(basketItem.modifiers) ===
+          JSON.stringify(item.modifiers)
+        );
+      }
+      return basketItem.id === item.id;
+    });
+  }, [basketItems, item.id, item.modifiers]);
 
   return (
     <>

@@ -17,14 +17,22 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
 
   if (items.length === 0) {
     return (
-      <div className="md:bg-white md:rounded-lg md:shadow-sm md:p-6 text-gray-500">
-        {t("basket.empty")}
+      <div className="bg-white shadow-2xl text-gray-500">
+        <header className="px-6 py-[22px] bg-gray-50">
+          <h1 className="text-xl font-medium">{t("basket.title")}</h1>
+        </header>
+        <div className="px-6 py-[22px]">
+          <p className="text-base">{t("basket.empty")}</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="md:static fixed inset-0 z-50 md:z-auto">
+    <div
+      data-testid="basket-container"
+      className="md:static fixed inset-0 z-50 md:z-auto"
+    >
       <div
         className="md:hidden fixed inset-0 bg-black bg-opacity-50"
         onClick={onClose}
@@ -66,7 +74,9 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
               ))}
             </div>
             <div className={styles.subtotalContainer}>
-              <span className={styles.subtotalText}>{t("basket.subtotal")}</span>
+              <span className={styles.subtotalText}>
+                {t("basket.subtotal")}
+              </span>
               <span className={styles.subtotalValue}>
                 {t("common.currency", { value: total.toFixed(2) })}
               </span>
@@ -80,7 +90,8 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
           </div>
           <div className={styles.checkoutContainer}>
             <button className={styles.checkoutButton}>
-              {t("basket.checkout")} • {t("common.currency", { value: total.toFixed(2) })}
+              {t("basket.checkout")} •{" "}
+              {t("common.currency", { value: total.toFixed(2) })}
             </button>
           </div>
         </div>
