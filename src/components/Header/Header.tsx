@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
         bg-nav-bg w-full md:items-center md:justify-center
       `}
       >
-        <div className="md:flex md:items-center">
+        <div className="md:h-full md:flex md:items-center">
           <div className="md:h-full md:flex md:justify-center md:items-center md:w-[232px] md:border-b-2 md:border-b-[5px]">
             <a
               href="#menu"

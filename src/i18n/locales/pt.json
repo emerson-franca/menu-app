@@ -21,5 +21,8 @@
     "menu": "MENU",
     "about": "ENTRAR",
     "contact": "CONTATO"
+  },
+  "search": {
+    "placeholder": "Pesquisar itens do menu"
   }
 }

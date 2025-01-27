@@ -21,5 +21,8 @@
     "menu": "MENU",
     "about": "ABOUT",
     "contact": "CONTACT"
+  },
+  "search": {
+    "placeholder": "Search menu items"
   }
 }
