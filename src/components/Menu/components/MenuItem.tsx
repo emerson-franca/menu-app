@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MenuItem as MenuItemType } from "../../../types";
 import { useAppSelector } from "../../../app/hooks";
 import { ItemDetails } from "./ItemDetails";
+import { useTranslation } from "react-i18next";
 
 interface MenuItemProps {
   item: MenuItemType;
@@ -10,6 +11,7 @@ interface MenuItemProps {
 export const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const basketItems = useAppSelector((state) => state.basket.items);
+  const { t } = useTranslation();
 
   const itemQuantity = basketItems
     .filter((basketItem) => basketItem.id === item.id)
@@ -31,18 +33,32 @@ export const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-2">
               {itemQuantity > 0 && (
-                <div className="w-5 h-5 bg-[#4F372F] rounded-[4px] flex items-center justify-center" data-testid="quantity-badge">
+                <div
+                  className="w-5 h-5 bg-[#4F372F] rounded-[4px] flex items-center justify-center"
+                  data-testid="quantity-badge"
+                >
                   <span className="text-white text-xs">{itemQuantity}</span>
                 </div>
               )}
-              <h3 className="font-roboto text-base font-medium" data-testid="item-name">{item.name}</h3>
+              <h3
+                className="font-roboto text-base font-medium"
+                data-testid="item-name"
+              >
+                {item.name}
+              </h3>
             </div>
           </div>
-          <p className="mt-1 font-roboto text-base font-light text-gray-600 line-clamp-2" data-testid="item-description">
+          <p
+            className="mt-1 font-roboto text-base font-light text-gray-600 line-clamp-2"
+            data-testid="item-description"
+          >
             {item.description}
           </p>
-          <p className="mt-1 font-roboto text-base font-medium" data-testid="item-price">
-            R$ {getItemPrice(item)}
+          <p
+            className="mt-1 font-roboto text-base font-medium"
+            data-testid="item-price"
+          >
+            {t("common.currency", { value: getItemPrice(item) })}
           </p>
         </div>
         {item.images?.[0]?.image && (

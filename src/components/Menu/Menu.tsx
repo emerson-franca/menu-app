@@ -56,7 +56,7 @@ export const Menu: React.FC<MenuProps> = ({
       <section className="bg-gray-50 md:hidden p-6 flex justify-center items-center border-y border-gray-100">
         <div className="bg-white rounded-lg w-full text-center">
           <a className="underline text-primary text-section-title" href="#">
-            View allergy information
+            {t("itemDetails.viewAllergy")}
           </a>
         </div>
       </section>

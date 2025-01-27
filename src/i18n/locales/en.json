@@ -12,7 +12,8 @@
   "itemDetails": {
     "chooseSize": "Choose your size",
     "selectOption": "Select 1 option",
-    "addToBasket": "Add to basket"
+    "addToBasket": "Add to basket",
+    "viewAllergy": "View allergy information"
   },
   "common": {
     "currency": "$ {{value}}"

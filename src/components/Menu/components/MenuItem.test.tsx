@@ -13,7 +13,9 @@ i18n.use(initReactI18next).init({
   lng: "en",
   resources: {
     en: {
-      translation: {},
+      translation: {
+        "common.currency": "${{value}}",
+      },
     },
   },
 });
@@ -91,7 +93,7 @@ describe("MenuItem", () => {
     expect(screen.getByTestId("item-description")).toHaveTextContent(
       "Test Description"
     );
-    expect(screen.getByTestId("item-price")).toHaveTextContent("R$ 10.99");
+    expect(screen.getByTestId("item-price")).toHaveTextContent(/10.99/i);
   });
 
   it("shows quantity badge when item is in basket", () => {
@@ -182,7 +184,7 @@ describe("MenuItem", () => {
 
     renderWithProviders(<MenuItem item={itemWithModifiers} />);
 
-    expect(screen.getByTestId("item-price")).toHaveTextContent("R$ 15.99");
+    expect(screen.getByTestId("item-price")).toHaveTextContent(/15.99/i);
   });
 
   it("displays image when provided", () => {

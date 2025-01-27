@@ -12,7 +12,8 @@
   "itemDetails": {
     "chooseSize": "Escolha o tamanho",
     "selectOption": "Selecione 1 opção",
-    "addToBasket": "Adicionar ao carrinho"
+    "addToBasket": "Adicionar ao carrinho",
+    "viewAllergy": "Ver informações sobre alergias"
   },
   "common": {
     "currency": "R$ {{value}}"
