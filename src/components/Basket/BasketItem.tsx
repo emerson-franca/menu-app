@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuItem } from "../../types";
+import { MenuItem, ModifierItem } from "../../types";
 import { styles } from "./styles";
 import { useBasket } from "../../hooks/useBasket";
 import { QuantityControl } from "../QuantityControl/QuantityControl";
@@ -7,15 +7,20 @@ import { QuantityControl } from "../QuantityControl/QuantityControl";
 interface BasketItemProps {
   item: MenuItem & {
     quantity?: number;
-    selectedModifiers?: {
-      name: string;
-      price: number;
-    };
+    selectedModifiers?: ModifierItem;
   };
 }
 
 export const BasketItem: React.FC<BasketItemProps> = ({ item }) => {
   const { increaseQuantity, decreaseQuantity } = useBasket();
+
+  const handleIncreaseQuantity = () => {
+    increaseQuantity(item.id, item.selectedModifiers?.id);
+  };
+
+  const handleDecreaseQuantity = () => {
+    decreaseQuantity(item.id, item.selectedModifiers?.id);
+  };
 
   return (
     <div key={item.id} className={styles.basketItem}>
@@ -33,8 +38,8 @@ export const BasketItem: React.FC<BasketItemProps> = ({ item }) => {
               <QuantityControl
                 size="small"
                 quantity={item.quantity || 1}
-                onDecrease={() => decreaseQuantity(item.id)}
-                onIncrease={() => increaseQuantity(item.id)}
+                onDecrease={handleDecreaseQuantity}
+                onIncrease={handleIncreaseQuantity}
               />
             </div>
           </div>
