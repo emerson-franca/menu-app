@@ -39,7 +39,8 @@ const Basket: React.FC<BasketProps> = ({ isOpen, onClose }) => {
       />
       <div
         className={`
-        h-full md:bg-white md:rounded-lg md:shadow-sm md:static md:transform-none
+        md:shadow-2xl
+        h-full md:bg-white md:rounded-lg md:static md:transform-none
         fixed bottom-0 left-0 right-0 bg-white transform transition-transform duration-300 ease-in-out
         ${isOpen ? "translate-y-0" : "translate-y-full"}
       `}
