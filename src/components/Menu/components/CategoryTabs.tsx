@@ -7,7 +7,7 @@ export const CategoryTabs: React.FC<CategoryTabsProps> = ({
   handleTabClick,
 }) => {
   return (
-    <div className="flex justify-between items-center px-4 py-5">
+    <div className="flex justify-between items-center px-4 py-5 md:justify-start md:gap-6">
       {sections.map((section) => (
         <button
           key={section.id}
@@ -16,7 +16,9 @@ export const CategoryTabs: React.FC<CategoryTabsProps> = ({
         >
           <div
             className={`p-[1px] w-[74px] h-[74px] rounded-full overflow-hidden border-2 ${
-              activeTab === section.name ? "border-primary" : "border-transparent"
+              activeTab === section.name
+                ? "border-primary"
+                : "border-transparent"
             }`}
           >
             <img
