@@ -104,3 +104,8 @@ yarn build
 - 🧩 **Component Structure**: Organized by feature and functionality for better maintainability
 - 🌍 **i18next**: Implements internationalization for global accessibility
 - 🧪 **Testing Library**: Focuses on testing user interactions rather than implementation details
+
+## 👨‍💻
+
+- I'm using proxy to avoid the API CORS issue.
+- If the request not work, please refresh the page.
