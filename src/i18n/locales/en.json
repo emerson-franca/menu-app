@@ -16,5 +16,10 @@
   },
   "common": {
     "currency": "$ {{value}}"
+  },
+  "header": {
+    "menu": "MENU",
+    "about": "ABOUT",
+    "contact": "CONTACT"
   }
 }

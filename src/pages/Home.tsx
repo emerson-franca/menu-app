@@ -10,9 +10,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 w-full">
-      <header>
-        <Header />
-      </header>
+      <Header />
       <main>
         <section aria-labelledby="hero-section">
           <Hero />

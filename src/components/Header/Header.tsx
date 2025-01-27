@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useRestaurant } from "../../contexts/RestaurantContext";
+import { useTranslation } from "react-i18next";
 
-export const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export const Header: React.FC = () => {
   const { restaurantData } = useRestaurant();
+  const { t } = useTranslation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <>
-      {/* Mobile Header */}
-      <header className="bg-nav-bg h-14 flex items-center justify-between py-[18px] px-4 md:hidden relative">
+    <header className="bg-nav-bg">
+      <div className="h-14 flex items-center justify-between py-[18px] px-4 md:hidden">
         <div className="w-8"></div>
         <h1 className="text-white font-medium">{restaurantData.name}</h1>
         <button
@@ -38,61 +39,44 @@ export const Header = () => {
             )}
           </svg>
         </button>
+      </div>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="absolute top-14 left-0 right-0 bg-nav-bg z-50">
-            <nav className="flex flex-col">
-              <a
-                href="/menu"
-                className="text-white px-4 py-3 hover:bg-primary-hover"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                MENU
-              </a>
-              <a
-                href="/about"
-                className="text-white px-4 py-3 hover:bg-primary-hover"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                ABOUT
-              </a>
-              <a
-                href="/contact"
-                className="text-white px-4 py-3 hover:bg-primary-hover"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                CONTACT
-              </a>
-            </nav>
+      <nav
+        className={`
+        ${isMenuOpen ? "block" : "hidden"} md:flex md:h-[52px]
+        bg-nav-bg w-full md:items-center md:justify-center
+      `}
+      >
+        <div className="md:flex md:items-center">
+          <div className="md:h-full md:flex md:justify-center md:items-center md:w-[232px] md:border-b-2 md:border-b-[5px]">
+            <a
+              href="#menu"
+              className="text-white block px-4 py-3 md:py-0 hover:bg-primary-hover md:hover:bg-transparent md:hover:text-gray-200 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t("header.menu")}
+            </a>
           </div>
-        )}
-      </header>
-
-      {/* Desktop Header */}
-      <header className="hidden md:flex bg-nav-bg h-16 items-center justify-between px-8">
-        <h1 className="text-white font-medium">{restaurantData.name}</h1>
-        <nav className="flex gap-8">
-          <a
-            href="/menu"
-            className="text-white hover:text-gray-200 transition-colors"
-          >
-            MENU
-          </a>
-          <a
-            href="/about"
-            className="text-white hover:text-gray-200 transition-colors"
-          >
-            ABOUT
-          </a>
-          <a
-            href="/contact"
-            className="text-white hover:text-gray-200 transition-colors"
-          >
-            CONTACT
-          </a>
-        </nav>
-      </header>
-    </>
+          <div className="md:h-full md:flex md:justify-center md:items-center md:w-[232px]">
+            <a
+              href="#about"
+              className="text-white block px-4 py-3 md:py-0 hover:bg-primary-hover md:hover:bg-transparent md:hover:text-gray-200 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t("header.about")}
+            </a>
+          </div>
+          <div className="md:h-full md:flex md:justify-center md:items-center md:w-[232px]">
+            <a
+              href="#contact"
+              className="text-white block px-4 py-3 md:py-0 hover:bg-primary-hover md:hover:bg-transparent md:hover:text-gray-200 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t("header.contact")}
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
   );
 };

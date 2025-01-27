@@ -16,5 +16,10 @@
   },
   "common": {
     "currency": "R$ {{value}}"
+  },
+  "header": {
+    "menu": "MENU",
+    "about": "ENTRAR",
+    "contact": "CONTATO"
   }
 }
