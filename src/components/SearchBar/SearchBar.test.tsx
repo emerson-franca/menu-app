@@ -2,6 +2,19 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SearchBar } from "./SearchBar";
+import i18n from "../../i18n/config";
+import { initReactI18next } from "react-i18next";
+
+i18n.use(initReactI18next).init({
+  lng: "en",
+  resources: {
+    en: {
+      translation: {
+        "search.placeholder": "Search menu items",
+      },
+    },
+  },
+});
 
 describe("SearchBar", () => {
   const mockSetSearchQuery = jest.fn();
