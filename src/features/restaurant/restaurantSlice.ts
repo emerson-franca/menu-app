@@ -10,10 +10,11 @@ interface RestaurantState {
   menuError: string | null;
 }
 
-const API_URL = process.env.REACT_APP_API_URL || "";
+const BASE_URL = "https://cdn-dev.preoday.com";
+const CORS_PROXY = "https://api.allorigins.win/raw?url=";
 
 const fetchWithHeaders = async (url: string) => {
-  const response = await fetch(`${API_URL}${url}`, {
+  const response = await fetch(`${CORS_PROXY}${encodeURIComponent(`${BASE_URL}${url}`)}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
