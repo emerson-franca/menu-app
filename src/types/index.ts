@@ -53,8 +53,8 @@ export interface Modifier {
   name: string;
   maxChoices: number;
   items: ModifierItem[];
-  available: true;
-  price: 33;
+  available: boolean;
+  price: number;
 }
 
 export interface MenuItem {
