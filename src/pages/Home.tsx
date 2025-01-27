@@ -35,6 +35,18 @@ const Home: React.FC = () => {
                 setIsBasketVisible={setIsBasketVisible}
               />
             </div>
+
+            <section className="md:hidden p-6 flex justify-center items-center border-y border-gray-100">
+              <div className="bg-white rounded-lg w-full text-center">
+                <a
+                  className="underline text-primary text-section-title"
+                  href="#"
+                >
+                  View allergy information
+                </a>
+              </div>
+            </section>
+
             <aside className="hidden md:block md:w-[350px]">
               <div className="sticky top-8">
                 <Basket
