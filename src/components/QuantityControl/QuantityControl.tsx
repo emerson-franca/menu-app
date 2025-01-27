@@ -27,6 +27,7 @@ export const QuantityControl: React.FC<QuantityControlProps> = ({
       } ${className}`}
     >
       <button
+        data-testid="decrease-quantity"
         onClick={onDecrease}
         aria-label="Decrease quantity"
         className={`${buttonSize} flex items-center justify-center rounded-full bg-primary text-white font-bold`}
@@ -56,6 +57,7 @@ export const QuantityControl: React.FC<QuantityControlProps> = ({
         {quantity}
       </span>
       <button
+        data-testid="increase-quantity"
         onClick={onIncrease}
         aria-label="Increase quantity"
         className={`${buttonSize} flex items-center justify-center rounded-full bg-primary text-white font-bold`}

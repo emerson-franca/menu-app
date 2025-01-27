@@ -16,4 +16,5 @@ export interface MenuSectionProps {
 export interface MenuProps {
   isBasketVisible: boolean;
   setIsBasketVisible: (visible: boolean) => void;
+  searchQuery: string;
 }
