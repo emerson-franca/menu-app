@@ -2,6 +2,8 @@
 
 A modern, responsive restaurant application built with React, TypeScript, and Redux Toolkit. This application provides a seamless experience for customers to browse menus, customize orders, and manage their shopping cart.
 
+https://menu-app-git-main-emersonfrancas-projects.vercel.app/
+
 ## ✨ Features
 
 - 📱 **Interactive Menu**: Browse through restaurant items with detailed descriptions
@@ -79,6 +81,12 @@ Run the test suite:
 ```bash
 yarn test
 ```
+
+Current coverage:
+
+![image](https://github.com/user-attachments/assets/48cf4ce4-f53c-4dcf-b7b7-37fbb990168a)
+
+
 
 ## 🏗️ Building for Production
 
