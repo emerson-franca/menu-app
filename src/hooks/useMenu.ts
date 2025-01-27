@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { fetchMenuData } from "../features/restaurant/restaurantSlice";
 
@@ -32,14 +32,14 @@ export const useMenu = () => {
     }
   }, [menuData]);
 
-  const toggleSection = (sectionName: string) => {
+  const toggleSection = useCallback((sectionName: string) => {
     setExpandedSections((prev) => ({
       ...prev,
       [sectionName]: !prev[sectionName],
     }));
-  };
+  }, []);
 
-  const handleTabClick = (sectionName: string) => {
+  const handleTabClick = useCallback((sectionName: string) => {
     if (activeTab === sectionName) {
       setActiveTab("");
     } else {
@@ -49,18 +49,20 @@ export const useMenu = () => {
         [sectionName]: true,
       }));
     }
-  };
+  }, [activeTab]);
 
-  const filteredSections = menuData?.sections
-    .filter((section) => !activeTab || section.name === activeTab)
-    .filter((section) => {
-      if (!searchQuery) return true;
-      return section.items.some(
-        (item) =>
-          item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          item.description?.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    });
+  const filteredSections = useMemo(() => {
+    return menuData?.sections
+      .filter((section) => !activeTab || section.name === activeTab)
+      .filter((section) => {
+        if (!searchQuery) return true;
+        return section.items.some(
+          (item) =>
+            item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.description?.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+  }, [menuData?.sections, activeTab, searchQuery]);
 
   return {
     menuData,
