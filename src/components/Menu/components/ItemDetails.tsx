@@ -40,7 +40,10 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div
+      role="dialog"
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
       <div className="bg-white w-full h-full md:h-auto md:w-full md:max-w-lg md:mx-4  overflow-hidden flex flex-col">
         <div className="relative flex-shrink-0">
           <img
@@ -49,6 +52,8 @@ export const ItemDetails: React.FC<ItemDetailsProps> = ({
             className="w-full h-full object-cover"
           />
           <button
+            data-testid="close-button"
+            aria-label="Close"
             onClick={onClose}
             className="absolute bg-white top-11 right-4 text-white bg-black rounded-full p-2"
           >
